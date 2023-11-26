@@ -23,11 +23,51 @@ function loadVideo() {
     videoElement.play(); 
     currentVideoIndex = (currentVideoIndex + 1) % videos.length;
 }
-
+function onVideoEnded() {
+    videoElement.removeEventListener('ended', onVideoEnded);
+    loadVideo();
+    }
+    videoElement.addEventListener('ended', onVideoEnded);
+    loadVideo();
 window.onload = loadVideo;
-
 videoElement.addEventListener('ended', loadVideo);
-const signin = document.querySelector('onclick');
 
+//++++++++++++++++++signinpage++++++++++++++++++++
+// function SignInPage(){
+//     let signUpForm = document.getElementById('signUpForm');
+//     signUpForm.style.display = 'none';
+//     let signInForm = document.getElementById('signInForm');
+//     signInForm.style.display = 'flex';
+//     let container = document.getElementById('form-container');
+//     container.style.transition = 'flex-direction 0.5s ease-in-out';
+//     requestAnimationFrame(() => {
+//         // Change flexDirection to row-reverse
+//         container.style.flexDirection = 'row-reverse';
+//     });
 
-  
+//     container.addEventListener('transitionend', function() {
+//         container.style.transition = '';
+//     }, { once: true });
+// }
+function SignInPage() {
+    
+    let signUpForm = document.getElementById('signUpForm');
+    signUpForm.style.display = 'none';
+    let signInForm = document.getElementById('signInForm');
+    signInForm.style.display = 'flex';
+    let container = document.getElementById('form-container');
+    container.style.flexDirection = 'row-reverse';
+
+}
+//++++++++++++++++++signuppage++++++++++
+function SignUpPage() {
+
+    let signInForm = document.getElementById('signInForm');
+    signInForm.style.display = 'none';
+    let signUpForm = document.getElementById('signUpForm');
+    signUpForm.style.display = 'flex';
+    let container = document.getElementById('form-container');
+    container.style.flexDirection = 'row';
+
+}
+//++++++++++++++++++++++++++++++
