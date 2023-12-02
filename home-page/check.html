@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Recorder</title>
+    <link rel="stylesheet" href="check.css">
+    <!-- <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #video-container {
+            position: relative;
+        }
+
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+        }
+
+        button {
+            margin: 0 5px;
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style> -->
+</head>
+<body>
+    <!-- <div id="video-container">
+        <video id="video" width="640" height="480" autoplay playsinline loop></video>
+        <div id="controls">
+            <button id="startBtn">Start</button>
+            <button id="pauseBtn" disabled>Pause</button>
+            <button id="stopBtn" disabled>Stop</button>
+            <button id="downloadBtn" disabled>Download</button>
+            <input type="file" id="uploadBtn">
+        </div>
+    </div> -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('video');
+            const startBtn = document.getElementById('startBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const uploadBtn = document.getElementById('uploadBtn');
+
+            let mediaRecorder;
+            let recordedChunks = [];
+
+            startBtn.addEventListener('click', startRecording);
+            pauseBtn.addEventListener('click', pauseRecording);
+            stopBtn.addEventListener('click', stopRecording);
+            downloadBtn.addEventListener('click', downloadVideo);
+            uploadBtn.addEventListener('change', handleUpload);
+
+            async function startRecording() {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+                video.srcObject = stream;
+
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    video.srcObject = null; // Stop the stream
+                    video.src = url;
+                    recordedChunks = [];
+                    downloadBtn.href = url;
+                    downloadBtn.download = 'recorded-video.webm';
+                    downloadBtn.disabled = false;
+                    startBtn.disabled = false; // Enable start button again
+                    pauseBtn.disabled = true;
+                    stopBtn.disabled = true; // Disable stop button after recording
+                };
+
+                startBtn.disabled = true;
+                pauseBtn.disabled = false;
+                stopBtn.disabled = false;
+
+                mediaRecorder.start();
+            }
+
+            function pauseRecording() {
+                if (mediaRecorder.state === 'recording') {
+                    mediaRecorder.pause();
+                    pauseBtn.innerText = 'Resume';
+                } else if (mediaRecorder.state === 'paused') {
+                    mediaRecorder.resume();
+                    pauseBtn.innerText = 'Pause';
+                }
+            }
+
+            function stopRecording() {
+                if (mediaRecorder.state === 'recording' || mediaRecorder.state === 'paused') {
+                    mediaRecorder.stop();
+                    // Note: The onstop event will handle UI state
+                }
+            }
+
+            function downloadVideo() {
+                // Download using a data URL
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'recorded-video.webm';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+
+            function handleUpload(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    video.src = URL.createObjectURL(file);
+                    startBtn.disabled = true;
+                    pauseBtn.disabled = true;
+                    stopBtn.disabled = true;
+                    downloadBtn.disabled = false;
+                }
+            }
+        });
+    </script> -->
+    <div class="container">
+        <h1>Image Uploader</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <div id="circle-crop">
+            <img id="preview" alt="Preview">
+        </div>       
+        <button onclick="uploadImage()">Upload</button>
+    </div>
+    <script src="check.js"></script>
+</body>
+</html>
